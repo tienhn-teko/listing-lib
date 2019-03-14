@@ -1,2 +1,4 @@
 .idea/
+.vscode/
 listing-lib.iml
+__pycache__
