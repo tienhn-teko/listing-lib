@@ -16,11 +16,11 @@ products = [
     }
 ]
 
-def test_ingest_products():
+def test_update_products():
     es_repo = EsRepositoryInterface()
     es_repo._index = 'product_catalog_dev'
     try:
         es_repo.is_existed
     except Exception:
         es_repo.create_if_not_exists()
-    es_repo.ingest_products(data=products)
+    es_repo.update_products(data=products)
