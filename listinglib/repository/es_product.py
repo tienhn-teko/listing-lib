@@ -9,21 +9,8 @@ _logger = logging.getLogger(__name__)
 
 
 class EsProductRepository(EsRepositoryInterface):
-    def __init__(self, es_product = None):
+    def __init__(self, es_product = None, doc_type = None):
         super().__init__()
         self._index = es_product or EsConfig.PRODUCT_CATALOG_INDEX
+        self.doc_type = doc_type or EsConfig.PRODUCT_CATALOG_DOC_TYPE
 
-
-    @staticmethod
-    def _valid_products(products):
-        products = [
-            {
-                '_op_type': 'update',
-                '_id': product['sku'],
-                'doc': product,
-                'doc_as_upsert': False
-            }
-            for product in products if 'sku' in product
-        ]
-        print('DEBUG', products[0])
-        return products

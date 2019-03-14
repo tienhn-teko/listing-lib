@@ -16,6 +16,8 @@ class Mode(Enum):
 class EsConfig:
     PRODUCT_CATALOG_INDEX = os.getenv('PRODUCT_CATALOG_INDEX',
                                       'product_lib_dev')
+    PRODUCT_CATALOG_DOC_TYPE = os.getenv('PRODUCT_CATALOG_DOC_TYPE',
+                                      'product')
     ELASTIC_URL = os.getenv('ELASTIC_URL', 'http://localhost:9200')
 
 
