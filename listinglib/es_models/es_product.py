@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 
 settings = {
     "index": {
-        "number_of_shards": 1,
+        "number_of_shards": 5,
         "number_of_replicas": 2,
         "max_result_window": 50000,
         "mapping": {"total_fields": {"limit": "10000"}}
