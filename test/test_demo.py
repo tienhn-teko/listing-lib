@@ -6,9 +6,6 @@ from test.conftest import PRODUCT_CATALOG_INDEX
 __author__ = 'TienHN'
 _logger = logging.getLogger(__name__)
 
-
-
-
 def test1(es_client):
     data_test = {
         "a": 1,

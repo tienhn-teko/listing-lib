@@ -1,6 +1,8 @@
 # coding=utf-8
 import logging
 
+from listinglib.es_models import EsData
+
 __author__ = 'TienHN'
 _logger = logging.getLogger(__name__)
 
@@ -13,5 +15,9 @@ class EsProductLogic:
         :param raw_product:
         :return: EsData
         """
-        # TODO
-        pass
+        id = raw_product.get("pv_sku", None)
+        if not type(id) == str:
+            raise Exception('pv_sku invalid ', raw_product)
+        info = raw_product
+
+        return EsData(_id=id, info=info)
