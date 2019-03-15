@@ -4,13 +4,13 @@ import logging
 __author__ = 'TienHN'
 _logger = logging.getLogger(__name__)
 
-class TestEsProductLogic:
+class TestEsProductService:
     @staticmethod
-    def test_valid_to_es_product_data():
+    def test_save():
         # TODO
         pass
 
     @staticmethod
-    def test_invalid_to_es_product_data():
+    def test_save_all():
         # TODO
         pass
