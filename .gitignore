@@ -2,3 +2,4 @@
 .vscode/
 listing-lib.iml
 __pycache__
+/venv/

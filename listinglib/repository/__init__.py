@@ -32,7 +32,7 @@ class EsRepositoryInterface:
         :param data_list: Array<EsData>
         :return:
         """
-        queries = {
+        queries = [
             {
                 "_op_type": "update",
                 "_id": data.id,
@@ -40,7 +40,7 @@ class EsRepositoryInterface:
                 "doc_as_upsert": True
             }
             for data in data_list
-        }
+        ]
         res = self._es.bulk(index_name=self._index, actions=queries,
                             chunk_size=50)
         self._es.indextool().refresh(self._index)
