@@ -26,7 +26,7 @@ class EsRepositoryInterface:
         self._es.indextool().refresh(self._index)
         return res
 
-    def save_all(self, data_list):
+    def save_all(self, data_list, chunk_size=100):
         """
         Bulk index list data to elastic search
         :param data_list: Array<EsData>
@@ -41,7 +41,7 @@ class EsRepositoryInterface:
             }
             for data in data_list
         ]
-        res = self._es.bulk(index_name=self._index, actions=queries,
-                            chunk_size=50)
+        res = self._es.bulk(index_name=self._index,
+                            actions=queries, chunk_size=chunk_size)
         self._es.indextool().refresh(self._index)
         return res

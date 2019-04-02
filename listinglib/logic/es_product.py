@@ -15,9 +15,8 @@ class EsProductLogic:
         :param raw_product:
         :return: EsData
         """
-        id = raw_product.get("pv_sku", None)
+        id = raw_product.get("sku", None)
         if not type(id) == str:
-            raise Exception('pv_sku invalid ', raw_product)
+            raise Exception('sku invalid ', raw_product)
         info = raw_product
-
         return EsData(_id=id, info=info)
