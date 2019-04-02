@@ -1,7 +1,7 @@
 # coding=utf-8
 import logging
 
-from listinglib.config import EsConfig
+from listinglib.config import Config
 from test.conftest import PRODUCT_CATALOG_INDEX
 
 __author__ = 'TienHN'
@@ -12,5 +12,5 @@ def test_index(es_client):
         "pv_sku": "1",
         "name": "2"
     }
-    res = es_client.index(index=PRODUCT_CATALOG_INDEX, body=data_test, doc_type=EsConfig.PRODUCT_CATALOG_DOC_TYPE)
+    res = es_client.index(index=PRODUCT_CATALOG_INDEX, body=data_test, doc_type=Config.PRODUCT_DOC_TYPE)
     assert res

@@ -34,10 +34,11 @@ def es_client(request):
 
 @pytest.fixture
 def product_test_data():
-    data = {}
-    data['_RAW'] = [
-        {"name": "Chuột Logitech G102", "pv_sku": "123456"},
-        {"name": "Chuột Fuhlen", "pv_sku": "654321"}
-    ]
-    data['_PARSED'] = [EsProductLogic.to_es_data(p) for p in data['_RAW']]
+    data = {
+        "_RAW" : [
+            {"name": "Chuột Logitech G102", "pv_sku": "123456"},
+            {"name": "Chuột Fuhlen", "pv_sku": "654321"}
+        ]
+    }
+    data["_PARSED"] = [EsProductLogic.to_es_data(p) for p in data['_RAW']]
     return data

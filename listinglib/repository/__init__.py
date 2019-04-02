@@ -3,15 +3,15 @@ import logging
 
 from elastictools.doctools import DocTools
 
-from listinglib.config import EsConfig
+from listinglib.config import Config
 
 __author__ = 'TienHN'
 _logger = logging.getLogger(__name__)
 
 
 class EsRepositoryInterface:
-    def __init__(self, elastic_url=None):
-        self._es = DocTools.from_url(elastic_url or EsConfig.ELASTIC_URL)
+    def __init__(self, mode=None):
+        self._es = DocTools.from_url(Config.get_es_config(mode).ELASTIC_URL)
         self._index = None
         self.doc_type = None
 
@@ -30,6 +30,7 @@ class EsRepositoryInterface:
         """
         Bulk index list data to elastic search
         :param data_list: Array<EsData>
+        :param chunk_size: int
         :return:
         """
         queries = [

@@ -8,31 +8,49 @@ _logger = logging.getLogger(__name__)
 
 
 class Mode(Enum):
+    LOCAL = 'local'
     DEV = 'dev'
     TEST = 'test'
     PROD = 'prod'
 
 
-class EsConfig:
-    PRODUCT_CATALOG_INDEX = os.getenv('PRODUCT_CATALOG_INDEX',
-                                      'product_dev_v2')
-    PRODUCT_CATALOG_DOC_TYPE = os.getenv('PRODUCT_CATALOG_DOC_TYPE',
-                                      'products')
-    ELASTIC_URL = os.getenv('ELASTIC_URL', 'http://localhost:9200')
+class Config:
+
+    MODE = Mode.DEV
+    PRODUCT_INDEX = 'product_dev_v2'
+    PRODUCT_DOC_TYPE = 'products'
+
+    @staticmethod
+    def set_mode(mode):
+        Config.MODE = mode
 
 
-class DatabaseConfig:
-    TK_RESULT_DB_HOST = os.getenv('TK_RESULT_DB_HOST', '123.31.32.171')
-    TK_RESULT_DB_PORT = os.getenv('TK_RESULT_DB_PORT', '3306')
-    TK_RESULT_DB_USER = os.getenv('TK_RESULT_DB_USER', 'bigdata')
-    TK_RESULT_DB_PASS = os.getenv('TK_RESULT_DB_PASS', 'bigdata123')
-    TK_RESULT_DB_NAME = os.getenv('TK_RESULT_DB_NAME', 'tk_result')
+    @staticmethod
+    def get_es_config(mode=None):
+        _mode = mode if mode else Config.MODE
+        if mode == Mode.LOCAL:
+            return LocalConfig
+        elif mode == Mode.DEV:
+            return DevelopmentConfig
+        elif mode == Mode.TEST:
+            return TestConfig
+        elif mode == Mode.PROD:
+            return ProductionConfig
+        else:
+            raise Exception("Invalid mode for listing lib")
 
-    CATALOG_DB_HOST = os.getenv('CATALOG_DB_HOST', '123.31.32.181')
-    CATALOG_DB_PORT = os.getenv('CATALOG_DB_PORT', '3306')
-    CATALOG_DB_USER = os.getenv('CATALOG_DB_USER', 'congtm')
-    CATALOG_DB_PASS = os.getenv('CATALOG_DB_PASS', 'DgKoL3103b')
-    CATALOG_DB_NAME = os.getenv('CATALOG_DB_NAME', 'catalog-live')
+
+class LocalConfig(Config):
+    ELASTIC_URL = 'http://localhost:9200'
 
 
-ENV_MODE = Mode(os.getenv('ENV_MODE', 'dev'))
+class DevelopmentConfig(Config):
+    ELASTIC_URL = 'http://123.31.32.226:9200'
+
+
+class TestConfig(Config):
+    ELASTIC_URL = 'http://localhost:9200'
+
+class ProductionConfig(Config):
+    ELASTIC_URL = 'http://123.31.32.226:9200'
+

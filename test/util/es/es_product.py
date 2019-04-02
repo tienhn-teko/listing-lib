@@ -1,9 +1,7 @@
 # coding=utf-8
 import logging
 
-from elasticsearch import Elasticsearch
-
-from test.conftest import PRODUCT_CATALOG_INDEX, PRODUCT_CATALOG_URL, es_client
+from test.conftest import PRODUCT_CATALOG_INDEX
 
 __author__ = 'TungLQ'
 _logger = logging.getLogger(__name__)

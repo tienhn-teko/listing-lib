@@ -1,10 +1,11 @@
 # coding=utf-8
 import logging
 
-from listinglib.config import EsConfig
+from listinglib.config import Config
 from listinglib.repository import EsRepositoryInterface
 from listinglib.logic.es_product import EsProductLogic
 from listinglib.logic.es_product_quantity_revenue import EsProductQuantityRevenue
+from listinglib.repository.es_product import EsProductRepository
 
 __author__ = 'TienHN'
 _logger = logging.getLogger(__name__)
@@ -18,7 +19,9 @@ class EsProductService:
         :param product: json
         :return:
         """
-        pass
+        parsed_product = EsProductLogic.to_es_data(product)
+        es = EsProductRepository()
+        return es.save(parsed_product)
 
     @staticmethod
     def save_all(products):
@@ -27,13 +30,15 @@ class EsProductService:
         :param products: Array<json>
         :return:
         """
-        pass
+        parsed_products = list(map(EsProductLogic.to_es_data,products))
+        es = EsProductRepository()
+        return es.save_all(parsed_products)
 
     @staticmethod
     def save_all_with_quantity_and_revenue():
         raw_resp = EsProductQuantityRevenue.collect_quantity_and_revenue_by_pv_sku()
         parsed_resp = list(map(EsProductLogic.to_es_data,raw_resp))
         es = EsRepositoryInterface()
-        es._index = EsConfig.PRODUCT_CATALOG_INDEX
-        es.doc_type = EsConfig.PRODUCT_CATALOG_DOC_TYPE
+        es._index = Config.PRODUCT_INDEX
+        es.doc_type = Config.PRODUCT_DOC_TYPE
         es.save_all(parsed_resp)
