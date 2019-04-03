@@ -1,7 +1,7 @@
 # coding=utf-8
 import logging
 
-from test.conftest import PRODUCT_CATALOG_INDEX
+from test.conftest import PRODUCT_INDEX
 
 __author__ = 'TungLQ'
 _logger = logging.getLogger(__name__)
@@ -13,13 +13,13 @@ class EsProduct:
 
     def get_products_by_id(self, id):
         return self._es.get_source(
-            index=PRODUCT_CATALOG_INDEX,
+            index=PRODUCT_INDEX,
             doc_type='_all',
             id=id)
 
     def get_products_by_ids(self, ids):
         resp = self._es.mget(
-            index=PRODUCT_CATALOG_INDEX,
+            index=PRODUCT_INDEX,
             doc_type='_all',
             body={'ids': ids})
         filtered_data = [doc['_source'] for doc in resp['docs'] if doc['found']]

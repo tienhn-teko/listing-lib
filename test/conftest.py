@@ -10,7 +10,7 @@ from listinglib.logic.es_product import EsProductLogic
 __author__ = 'TienHN'
 _logger = logging.getLogger(__name__)
 
-PRODUCT_CATALOG_INDEX = "product_catalog_to_pytest"
+PRODUCT_INDEX = "product_catalog_to_pytest"
 PRODUCT_CATALOG_URL = "http://localhost:9200"
 
 
@@ -20,13 +20,13 @@ def es_client(request):
     :return: es_product
     """
     es = Elasticsearch(PRODUCT_CATALOG_URL)
-    es.indices.create(PRODUCT_CATALOG_INDEX, body={
+    es.indices.create(PRODUCT_INDEX, body={
         "settings": settings,
         "mappings": mapping
     })
 
     def teardown():
-        es.indices.delete(index=PRODUCT_CATALOG_INDEX)
+        es.indices.delete(index=PRODUCT_INDEX)
 
     request.addfinalizer(teardown)
     return es
