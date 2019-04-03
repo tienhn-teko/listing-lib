@@ -29,7 +29,7 @@ listing_lib_logger = logging.getLogger("Listing lib")
 listing_lib_logger.setLevel(logging.INFO)
 f_handler = MakeFileHandler('var/log/listing_lib/listing_lib.log')
 f_handler.setLevel(logging.INFO)
-f_format = logging.Formatter('%(levelname)-5.5s %(asctime)s [%(name)s][%(module)s:%(lineno)d] %(message)s')
+f_format = logging.Formatter('%(levelname)-5.5s %(asctime)s [%(name)s][%(module)s:%(lineno)d] [%(pathname)s] %(message)s')
 f_handler.setFormatter(f_format)
 listing_lib_logger.addHandler(f_handler)
 
