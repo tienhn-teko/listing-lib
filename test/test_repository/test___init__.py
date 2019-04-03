@@ -2,7 +2,7 @@
 import logging
 
 from listinglib.repository import EsRepositoryInterface
-from listinglib.config import Config
+from listinglib.esconfig import EsConfig
 from test.conftest import PRODUCT_INDEX
 from test.util.es.es_product import EsProduct, ComparableProduct
 
@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 def test_save(product_test_data, es_client):
     es_product = EsRepositoryInterface()
     es_product._index = PRODUCT_INDEX
-    es_product.doc_type = Config.PRODUCT_DOC_TYPE
+    es_product.doc_type = EsConfig.PRODUCT_DOC_TYPE
     test_data = product_test_data['_PARSED'][0]
     res = es_product.save(data=test_data)
     # assertion

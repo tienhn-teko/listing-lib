@@ -7,50 +7,50 @@ __author__ = 'TienHN'
 _logger = logging.getLogger(__name__)
 
 
-class Mode(Enum):
+class EsMode(Enum):
     LOCAL = 'local'
     DEV = 'dev'
     TEST = 'test'
     PROD = 'prod'
 
 
-class Config:
+class EsConfig:
 
-    MODE = Mode.DEV
+    MODE = EsMode.DEV
     PRODUCT_INDEX = 'product_dev_v2'
     PRODUCT_DOC_TYPE = 'products'
 
     @staticmethod
     def set_mode(mode):
-        Config.MODE = mode
+        EsConfig.MODE = mode
 
 
     @staticmethod
     def get_es_config(mode=None):
-        _mode = mode if mode else Config.MODE
-        if _mode == Mode.LOCAL:
-            return LocalConfig
-        elif _mode == Mode.DEV:
-            return DevelopmentConfig
-        elif _mode == Mode.TEST:
-            return TestConfig
-        elif _mode == Mode.PROD:
-            return ProductionConfig
+        _mode = mode if mode else EsConfig.MODE
+        if _mode == EsMode.LOCAL:
+            return LocalEsConfig
+        elif _mode == EsMode.DEV:
+            return DevelopmentEsConfig
+        elif _mode == EsMode.TEST:
+            return TestEsConfig
+        elif _mode == EsMode.PROD:
+            return ProductionEsConfig
         else:
             raise Exception("Invalid mode for listing lib")
 
 
-class LocalConfig(Config):
+class LocalEsConfig(EsConfig):
     ELASTIC_URL = 'http://localhost:9200'
 
 
-class DevelopmentConfig(Config):
+class DevelopmentEsConfig(EsConfig):
     ELASTIC_URL = 'http://123.31.32.226:9200'
 
 
-class TestConfig(Config):
+class TestEsConfig(EsConfig):
     ELASTIC_URL = 'http://localhost:9200'
 
-class ProductionConfig(Config):
+class ProductionEsConfig(EsConfig):
     ELASTIC_URL = 'http://123.31.32.226:9200'
 

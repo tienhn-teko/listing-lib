@@ -3,7 +3,7 @@ import logging
 
 from elastictools.doctools import DocTools
 
-from listinglib.config import Config
+from listinglib.esconfig import EsConfig
 
 __author__ = 'TienHN'
 _logger = logging.getLogger(__name__)
@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 
 class EsRepositoryInterface:
     def __init__(self, mode=None):
-        self._es = DocTools.from_url(Config.get_es_config(mode).ELASTIC_URL)
+        self._es = DocTools.from_url(EsConfig.get_es_config(mode).ELASTIC_URL)
         self._index = None
         self.doc_type = None
 
