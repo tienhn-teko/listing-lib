@@ -21,10 +21,7 @@ setup_args = dict(
 )
 
 install_requires = [
-    'elastictools',
-    'SQLAlchemy',
-    'pandas',
-    'pymysql'
+    'elastictools'
 ]
 
 setuptools.setup(

@@ -1,6 +1,6 @@
 # coding=utf-8
 import logging
-import os
+
 from enum import Enum
 
 __author__ = 'TienHN'
@@ -28,13 +28,13 @@ class Config:
     @staticmethod
     def get_es_config(mode=None):
         _mode = mode if mode else Config.MODE
-        if mode == Mode.LOCAL:
+        if _mode == Mode.LOCAL:
             return LocalConfig
-        elif mode == Mode.DEV:
+        elif _mode == Mode.DEV:
             return DevelopmentConfig
-        elif mode == Mode.TEST:
+        elif _mode == Mode.TEST:
             return TestConfig
-        elif mode == Mode.PROD:
+        elif _mode == Mode.PROD:
             return ProductionConfig
         else:
             raise Exception("Invalid mode for listing lib")
