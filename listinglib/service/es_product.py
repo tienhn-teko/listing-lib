@@ -1,6 +1,7 @@
 # coding=utf-8
 import logging
 
+from listinglib import listing_lib_logger
 from listinglib.logic.es_product import EsProductLogic
 from listinglib.repository.es_product import EsProductRepository
 
@@ -16,6 +17,7 @@ class EsProductService:
         :param product: json
         :return:
         """
+        listing_lib_logger.info("Save: ", product)
         parsed_product = EsProductLogic.to_es_data(product)
         es = EsProductRepository()
         return es.save(parsed_product)
@@ -27,6 +29,7 @@ class EsProductService:
         :param products: Array<json>
         :return:
         """
+        listing_lib_logger.info("Save all: ", products)
         parsed_products = list(map(EsProductLogic.to_es_data,products))
         es = EsProductRepository()
         return es.save_all(parsed_products)
