@@ -17,7 +17,7 @@ class EsProductService:
         :param product: json
         :return:
         """
-        listing_lib_logger.info("Save: ", product)
+        listing_lib_logger.info("Save: ", str(product))
         parsed_product = EsProductLogic.to_es_data(product)
         es = EsProductRepository()
         return es.save(parsed_product)
@@ -29,7 +29,7 @@ class EsProductService:
         :param products: Array<json>
         :return:
         """
-        listing_lib_logger.info("Save all: ", products)
+        listing_lib_logger.info("Save all: ", str(products))
         parsed_products = list(map(EsProductLogic.to_es_data,products))
         es = EsProductRepository()
         return es.save_all(parsed_products)
