@@ -8,8 +8,9 @@ with open("README.md", "r") as rm:
 #     HISTORY = h.read()
 
 setup_args = dict(
-    name='pv-elastic-listing-lib',
-    version='0.1.0',
+    name='es-listing-lib',
+    version_format='{tag}.dev{commitcount}+{gitsha}',
+    setup_requires=['setuptools-git-version'],
     long_description=README,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
