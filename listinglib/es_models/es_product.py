@@ -6,7 +6,7 @@ _logger = logging.getLogger(__name__)
 
 settings = {
     "index": {
-        "max_result_window": 500000,
+        "max_result_window": 1000,
         "analysis": {
             "filter": {
                 "synonym_filter": {
